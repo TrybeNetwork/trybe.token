@@ -17,9 +17,6 @@ namespace trybe {
             s.max_supply    = maximum_supply;
             s.issuer        = issuer;
         });
-
-        //SEND_INLINE_ACTION( *this, issue, {_self,N(active)}, {string_to_name("scatterfunds"), asset( 250'000'000'0000, trybe::SYMBOL ), "Development Fund"} );
-        //SEND_INLINE_ACTION( *this, issue, {_self,N(active)}, {string_to_name("trybetrybetrybe"), asset( 500'000'000'0000, trybe::SYMBOL ), "trybe Token Reserve"} );
     }
 
 
@@ -69,7 +66,6 @@ namespace trybe {
     }
 
     void token::transfer( account_name from, account_name to, asset quantity, string memo ) {
-        eosio_asset(false,"transfers are locked");
         eosio_assert( from != to, "cannot transfer to self" );
         require_auth( from );
         eosio_assert( is_account( to ), "to account does not exist");
