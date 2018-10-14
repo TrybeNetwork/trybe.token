@@ -36,10 +36,6 @@ namespace trybesale {
                        asset        quantity,
                        string       memo );
 
-        void setuppresale();
-
-       / void resetacct(account_name account);
-
 
         inline asset get_supply( symbol_name sym )const;
 
