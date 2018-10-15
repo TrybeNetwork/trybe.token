@@ -7,3 +7,5 @@ Preliminary token contract based on RIDL
 
 # trybepresale
 Presale contract based on the RIDL token sale
+
+Added referral functionality 
