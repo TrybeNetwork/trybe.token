@@ -12,8 +12,6 @@ namespace trybesale {
     using namespace eosio;
     using std::string;
 
-    //static uint64_t     SYMBOL = string_to_symbol(4, "RIDL");
-    //static int64_t      MAX_SUPPLY = 1'500'000'000'0000;
     static uint64_t EOS_SYMBOL    = string_to_symbol(2, "EOS");
     static int64_t  EOS_MAX_SUPPLY    = 10'000'000'000'0000;
 
