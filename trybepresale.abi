@@ -38,24 +38,12 @@
         }
       ]
     },{
-      "name": "resetacct",
-      "base": "",
-      "fields": [{
-          "name": "account",
-          "type": "name"
-        }
-      ]
-    },{
       "name": "setuppresale",
       "base": "",
       "fields": []
     }
   ],
   "actions": [{
-      "name": "resetacct",
-      "type": "resetacct",
-      "ricardian_contract": ""
-    },{
       "name": "setuppresale",
       "type": "setuppresale",
       "ricardian_contract": ""
