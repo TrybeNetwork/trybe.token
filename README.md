@@ -6,4 +6,4 @@ Preliminary token contract based on RIDL
 `cleos push action trybenetwork claim '{"claimer":"myaccount"}' -p myaccount`
 
 # trybepresale
-Presale contract based on the RIDl token sale
+Presale contract based on the RIDL token sale
