@@ -121,13 +121,72 @@ public:
 
         eosio_assert( existing_itr != statstable.end(), "Presale statistics entry not found" );
 
+        if ( (existing_itr->totalsold + newtrybe ) > existing_itr->totalavailable  ){
+            eosio_assert(false, "Not enough TRYBE available, please select a lower amount of EOS");
+        }
+
         statstable.modify(existing_itr, 0, [&](auto &s) {
             s.totalsold += newtrybe;
         });
 
     }
 
-    
+    /*
+    abi action
+    void resetacct(account_name account){
+
+        eosio_assert(false,"Disabled");
+
+        presale_table presale(_self,_self);
+
+        auto presale_itr = presale.find(account);
+
+        eosio_assert(presale_itr != presale.end(),"fail" );
+
+        presale.erase(presale_itr);
+
+        asset maximum_supply = asset(trybesale::TRYBE_MAX_SUPPLY, trybesale::TRYBESYMBOL);
+
+        presalestats_table statstable(_self, maximum_supply.symbol.name());
+
+        auto existing_itr = statstable.find( maximum_supply.symbol.name() );
+
+        eosio_assert( existing_itr != statstable.end(), "Presale statistics entry not found" );
+
+        statstable.modify(existing_itr, 0, [&](auto &s) {
+            s.totalsold = asset(0, trybesale::TRYBESYMBOL);
+        });
+
+    }*/
+
+
+    // @abi action
+    void setuppresale(){
+
+        require_auth( _self );
+
+        account_name issuer = _self;
+        asset maximum_supply = asset(trybesale::TRYBE_MAX_SUPPLY, trybesale::TRYBESYMBOL);
+
+        presalestats_table statstable(_self, maximum_supply.symbol.name());
+
+        auto existing = statstable.find( maximum_supply.symbol.name() );
+
+        //eosio_assert( existing == statstable.end(), "Sale settings already in place" );
+
+        if ( existing == statstable.end() ) {
+            statstable.emplace(_self, [&](auto &s) {
+                s.totalavailable = asset(trybesale::TRYBE_MAX_SUPPLY, trybesale::TRYBESYMBOL);
+                s.totalsold = asset(0, trybesale::TRYBESYMBOL);
+                s.issuer = issuer;
+            });
+        }else{
+            statstable.modify(existing, 0, [&](auto &s) {
+                s.totalavailable = asset(trybesale::TEST_MAX_PRESALE, trybesale::TRYBESYMBOL);
+            });
+        }
+
+    }
 
     void receivedTokens( const currency::transfer& t, account_name code ) {
         if( code == _self ){
@@ -159,7 +218,7 @@ public:
         if( contract != _self ) return;
         auto& thiscontract = *this;
         switch( action ) {
-            //EOSIO_API( trybefunds, (setuppresale) )
+            EOSIO_API( trybefunds, (setuppresale) )
         };
     }
 };
