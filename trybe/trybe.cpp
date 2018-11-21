@@ -151,10 +151,6 @@ namespace eosio {
                           ) {
       require_auth( _self );
 
-      print("tokenname_vtr.size() : ", tokenname_vtr.size(), "\n");
-      print("eosprice_vtr.size() : ", eosprice_vtr.size(), "\n");
-      print("usdprice_vtr.size(): ", usdprice_vtr.size(), "\n");
-
       eosio_assert( tokenname_vtr.size() == eosprice_vtr.size(), "tokenname and eosprice vectors have different size" );
       eosio_assert( tokenname_vtr.size() == usdprice_vtr.size(), "tokenname and usdprice vectors have different size" );
 
